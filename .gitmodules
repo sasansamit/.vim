@@ -39,10 +39,13 @@
 	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/vim-clojure-static"]
 	path = bundle/vim-clojure-static
-	url = https://github.com/guns/vim-clojure-static.git
+	url = https://github.com/guns/vim-clojure-static
 [submodule "bundle/vim-classpath"]
 	path = bundle/vim-classpath
 	url = https://github.com/tpope/vim-classpath.git
 [submodule "bundle/vim-fireplace"]
 	path = bundle/vim-fireplace
-	url = https://github.com/tpope/vim-fireplace.git
+	url = https://github.com/tpope/vim-fireplace
+[submodule "bundule/foldsearch"]
+	path = bundule/foldsearch
+	url = https://github.com/vim-scripts/foldsearch.git

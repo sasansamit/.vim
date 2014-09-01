@@ -2,14 +2,19 @@
 "   Global Stuff
 "------------------------------------------------------------------
 
-" Set the colorscheme - the one i really like
-colorscheme github
 
 " Turn syntax highlighting for files
-syntax on
+syntax enable
+
+" Set the colorscheme - the one i really like
+set background=dark
+" colorschem solarized
+colorscheme github
 
 " Turn on ruler
 set ruler
+
+set hlsearch
 
 " Enable loading the plugin files for specific file types with
 filetype plugin indent on
