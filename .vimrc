@@ -4,7 +4,7 @@
 
 set nocompatible
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/bundle')
 Plug 'xero/sourcerer.vim'
 Plug 'ggreer/the_silver_searcher'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -14,8 +14,10 @@ Plug 'mxw/vim-jsx'
 Plug 'scrooloose/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tfnico/vim-gradle'
 call plug#end()
-
 
 " Change <Leader>
 "let mapleader = ","
@@ -151,7 +153,7 @@ set splitright
 
 
 " NERDTree
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 " colored NERD Tree
 let NERDChristmasTree = 1
 let NERDTreeHighlightCursorline = 1
@@ -160,3 +162,5 @@ let NERDTreeShowHidden = 1
 let NERDTreeMapActivateNode='<CR>'
 let NERDTreeIgnore=['\.git','\.DS_Store','\.pdf', '.beam']
 
+" Auto-pair settings
+let g:AutoPairsFlyMode = 1
