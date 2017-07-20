@@ -1,166 +1,146 @@
-" Install vim-plug using the command
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-set nocompatible
+" on demand loading of plugins
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-call plug#begin('~/.vim/bundle')
-Plug 'xero/sourcerer.vim'
-Plug 'ggreer/the_silver_searcher'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Linters
+Plug 'https://github.com/moll/vim-node.git'
+Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/hallettj/jslint.vim.git'
+Plug 'https://github.com/walm/jshint.vim.git'
+
+" Syntax 
+Plug 'https://github.com/jelera/vim-javascript-syntax.git'
+Plug 'https://github.com/kchmck/vim-coffee-script.git'
+Plug 'https://github.com/digitaltoad/vim-pug.git'
+Plug 'https://github.com/wavded/vim-stylus.git'
+Plug 'https://github.com/vim-syntastic/syntastic.git'
+Plug 'https://github.com/juvenn/mustache.vim.git'
 Plug 'mxw/vim-jsx'
-Plug 'scrooloose/syntastic'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tfnico/vim-gradle'
+Plug 'elzr/vim-json'
+Plug 'https://github.com/ekalinin/Dockerfile.vim.git'
+Plug 'https://github.com/martinda/Jenkinsfile-vim-syntax.git'
+
+" Editing
+Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/tomtom/tcomment_vim.git'
+Plug 'https://github.com/scrooloose/nerdcommenter.git'
+
+" Snippets
+Plug 'https://github.com/garbas/vim-snipmate.git'
+Plug 'https://github.com/MarcWeber/vim-addon-mw-utils.git' " snipmate dependency
+Plug 'https://github.com/jamescarr/snipmate-nodejs.git'
+
+" Completions
+Plug 'https://github.com/guileen/vim-node-dict.git'
+Plug 'https://github.com/myhere/vim-nodejs-complete.git'
+Plug 'https://github.com/ahayman/vim-nodejs-complete.git'
+Plug 'https://github.com/ternjs/tern_for_vim.git'
+Plug 'https://github.com/Valloric/YouCompleteMe.git'
+
+" Browsing
+Plug 'https://github.com/wincent/command-t.git', {
+    \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+    \ }
+Plug 'https://github.com/mileszs/ack.vim.git'
+
+
+" Colorschemes
+Plug 'https://github.com/altercation/vim-colors-solarized.git'
+Plug 'https://github.com/marcus/vim-mustang.git'
+
+
+" Node debug
+Plug 'https://github.com/sidorares/node-vim-debugger.git'
+
+" SCM plugins
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
+
+" status bar plugin
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+
+" Initialize plugin system
 call plug#end()
-
-" Change <Leader>
-"let mapleader = ","
-set guifont=Monaco:h12
-colorscheme sourcerer
-set background=dark
-
-set nobackup
-set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=50
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set wrapscan      " Searches wrap around end of the file.
-set ignorecase
-set smartcase
-
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-set cursorline    " highlight the current line the cursor is on
-set diffopt+=vertical
-
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-
-" Numbers
-set number
-set numberwidth=5
-
-"sm:    flashes matching brackets or parentheses
-set showmatch
-
-" Softtabs, 2 spaces
-set tabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
-
-"sta:   helps with backspacing because of expandtab
-set smarttab
-
-" When scrolling off-screen do so 3 lines at a time, not 1
-set scrolloff=3
-
-
-" Enable tab complete for commands.
-" first tab shows all matches. next tab starts cycling through the matches
-set wildmenu
-set spelllang=en_gb
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<c-p>"
-  endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
 
 filetype plugin indent on
 
 
-augroup vimrcEx
-  autocmd!
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
-
-  " Automatically wrap at 72 characters and spell check git commit messages
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
-augroup END
+" Setup the color scheme
+set background=dark
+color xoria256
 
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " bind K to grep word under cursor
-  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-  " bind \ (backward slash) to grep shortcut
-  "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  nnoremap \ :Ag<SPACE>
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+" formatting defaults, for details - http://tedlogan.com/techblog3.html
+set tabstop=2
+set autoindent
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set nowrap
 
 
-" Open new split panes to right and bottom, which feels more natural
+set number                     " turn on line numbers
+set title
+syntax on
+set nobackup
+set noswapfile                 " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set history=50
+set ruler                      " show the cursor position all the time
+set incsearch                  " do incremental searching
+set wrapscan                   " Searches wrap around end of the file.
+set ignorecase
+set smartcase
+set autowrite                  " Automatically :write before running commands
+set cursorline                 " highlight the current line the cursor is on
+set diffopt+=vertical          " start a diff in vertical split mode
+set laststatus=2               " always have a status line
+set showmatch                  " flashes matching brackets or parentheses
+set scrolloff=5                " number of lines above and below the current line
+set wildmenu                   " commandline auto completions come above the commandline
 set splitbelow
-set splitright
+set splitright                 " split new window on the right
+set visualbell                 " No beeping
+set hlsearch                   " Highlight search terms
+set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+
+" setup airline
+let g:airline_theme='kolor'
+let g:airline#extensions#tabline#enabled = 1
+
+" JS formatter using esformat
+nnoremap <silent> <leader>e :call JSFormat()<cr>
+
+function! JSFormat()
+  " Preparation: save last search, and cursor position.
+  let l:win_view = winsaveview()
+  let l:last_search = getreg('/')
+  let fileWorkingDirectory = expand('%:p:h')
+  let currentWorkingDirectory = getcwd()
+  execute ':lcd' . fileWorkingDirectory
+  execute ':silent' . '%!esformatter'
+  if v:shell_error
+    undo
+    "echo "esformatter error, using builtin vim formatter"
+    " use internal formatting command
+    execute ":silent normal! gg=G<cr>"
+  endif
+  " Clean up: restore previous search history, and cursor position
+  execute ':lcd' . currentWorkingDirectory
+  call winrestview(l:win_view)
+  call setreg('/', l:last_search)
+endfunction
 
 
-" NERDTree
-let NERDTreeQuitOnOpen=0
-" colored NERD Tree
-let NERDChristmasTree = 1
-let NERDTreeHighlightCursorline = 1
-let NERDTreeShowHidden = 1
-" map enter to activating a node
-let NERDTreeMapActivateNode='<CR>'
-let NERDTreeIgnore=['\.git','\.DS_Store','\.pdf', '.beam']
+" setup syntastic
+let g:syntastic_java_checkers = ['checkstyle']
+let g:syntastic_java_checkstyle_classpath= '~/.vim/libs/checkstyle-8.0-all.jar'
+let g:syntastic_java_checkstyle_conf_file = '~/.vim/libs/google_checks_with_suppressions.xml'
 
-" Auto-pair settings
-let g:AutoPairsFlyMode = 1
+
+let g:syntastic_javascript_checkers = ['eslint']
