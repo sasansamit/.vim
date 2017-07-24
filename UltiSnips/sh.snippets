@@ -1,0 +1,10 @@
+snippet function "function body" b
+function $1() {
+	$0
+}
+endsnippet
+
+snippet ROOT "Script ROOT var" b
+${1:ROOT}=\$(cd \$(dirname \$0)$2; pwd)$0
+endsnippet
+

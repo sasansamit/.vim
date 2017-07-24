@@ -30,9 +30,12 @@ Plug 'https://github.com/tomtom/tcomment_vim.git'
 Plug 'https://github.com/scrooloose/nerdcommenter.git'
 
 " Snippets
-Plug 'https://github.com/garbas/vim-snipmate.git'
-Plug 'https://github.com/MarcWeber/vim-addon-mw-utils.git' " snipmate dependency
-Plug 'https://github.com/jamescarr/snipmate-nodejs.git'
+Plug 'https://github.com/SirVer/ultisnips.git'
+"Plug 'https://github.com/garbas/vim-snipmate.git'
+"Plug 'https://github.com/tomtom/tlib_vim.git'
+"Plug 'https://github.com/MarcWeber/vim-addon-mw-utils.git' " snipmate dependency
+Plug 'https://github.com/honza/vim-snippets.git' " community owned  snippets files for various programming languages
+"Plug 'https://github.com/jamescarr/snipmate-nodejs.git'
 
 " Completions
 Plug 'https://github.com/guileen/vim-node-dict.git'
@@ -141,6 +144,15 @@ endfunction
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_java_checkstyle_classpath= '~/.vim/libs/checkstyle-8.0-all.jar'
 let g:syntastic_java_checkstyle_conf_file = '~/.vim/libs/google_checks_with_suppressions.xml'
+
+" Setup ultisnip
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-space>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 
 let g:syntastic_javascript_checkers = ['eslint']

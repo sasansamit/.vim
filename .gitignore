@@ -1,1 +1,6 @@
+*.vim
+.netrwhist
 
+node_modules/
+libs/
+plugged/

@@ -1,0 +1,26 @@
+snippet node "jenkinsfile node section" b
+node('${1:worker}') {
+	$0
+}
+endsnippet
+
+snippet stage "jenkinsfile stage section" b
+stage('$1') {
+  $0
+}
+endsnippet
+
+snippet dir "dir section" b
+dir('$1') {
+  $0
+}
+endsnippet
+
+snippet try "try - catch" b
+try \{
+  $0
+\}
+catch (e) \{
+  ${1:currentBuild.result = 'FAILURE'}
+\}
+endsnippet
