@@ -88,33 +88,37 @@ set softtabstop=2
 set nowrap
 
 
-set number                     " turn on line numbers
+set number                                    " turn on line numbers
 set title
 syntax on
 set nobackup
-set noswapfile                 " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set noswapfile                                " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
-set ruler                      " show the cursor position all the time
-set incsearch                  " do incremental searching
-set wrapscan                   " Searches wrap around end of the file.
+set ruler                                     " show the cursor position all the time
+set incsearch                                 " do incremental searching
+set wrapscan                                  " Searches wrap around end of the file.
 set ignorecase
 set smartcase
-set autowrite                  " Automatically :write before running commands
-set cursorline                 " highlight the current line the cursor is on
-set diffopt+=vertical          " start a diff in vertical split mode
-set laststatus=2               " always have a status line
-set showmatch                  " flashes matching brackets or parentheses
-set scrolloff=5                " number of lines above and below the current line
-set wildmenu                   " commandline auto completions come above the commandline
+set autowrite                                 " Automatically :write before running commands
+set cursorline                                " highlight the current line the cursor is on
+set diffopt+=vertical                         " start a diff in vertical split mode
+set laststatus=2                              " always have a status line
+set showmatch                                 " flashes matching brackets or parentheses
+set scrolloff=5                               " number of lines above and below the current line
+set wildmenu                                  " commandline auto completions come above the commandline
 set splitbelow
-set splitright                 " split new window on the right
-set visualbell                 " No beeping
-set hlsearch                   " Highlight search terms
-set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+set splitright                                " split new window on the right
+set visualbell                                " No beeping
+set hlsearch                                  " Highlight search terms
+set wildmode=list:longest,full                " Command <Tab> completion, list matches, then longest common part, then all.
 
-" setup airline
+                                              " setup airline
 let g:airline_theme='kolor'
 let g:airline#extensions#tabline#enabled = 1
+
+                                              " Setup NERDTree settings
+autocmd VimEnter * NERDTree                   " Show tree on startup
+autocmd VimEnter * wincmd p                   " Move curson to window
 
 " JS formatter using esformat
 nnoremap <silent> <leader>e :call JSFormat()<cr>
